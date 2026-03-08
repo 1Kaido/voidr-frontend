@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>VOIDR — Enter the Void</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Variables (mirrors main app) ── */
+    :root {
+      --bg:           #0d0f12;
+      --surface:      #161920;
+      --surface-2:    #1d212b;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.18);
+
+      --text-1: #eef0f4;
+      --text-2: #8c97aa;
+      --text-3: #4e5668;
+
+      --accent:      #4a8ff5;
+      --accent-soft: rgba(74,143,245,0.13);
+      --accent-hi:   #6ba5ff;
+      --accent-glow: rgba(74,143,245,0.35);
+
+      --danger:      #ef4444;
+      --danger-soft: rgba(239,68,68,0.11);
+
+      --f-display: 'Sora', sans-serif;
+      --f-body:    'DM Sans', sans-serif;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    html { -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--f-body);
+      background-color: var(--bg);
+      /* same top glow as main app */
+      background-image: radial-gradient(
+        ellipse 70% 45% at 50% 0%,
+        rgba(74,143,245,0.09) 0%,
+        transparent 70%
+      );
+      color: var(--text-1);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    /* ── Card ── */
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px 32px 36px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+      animation: cardin 0.4s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* top accent line */
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 0 0 2px 2px;
+    }
+
+    @keyframes cardin {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+
+    /* ── Logo / brand mark ── */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(74,143,245,0.3);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: var(--accent);
+      box-shadow: 0 0 20px var(--accent-glow);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px var(--accent-glow); }
+      50%       { box-shadow: 0 0 32px rgba(74,143,245,0.55); }
+    }
+
+    .brand h2 {
+      font-family: var(--f-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+    }
+
+    .brand p {
+      font-size: 13px;
+      color: var(--text-3);
+      font-weight: 400;
+    }
+
+    /* ── Input groups ── */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .input-group label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding-left: 4px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-wrapper i.input-icon {
+      position: absolute;
+      left: 15px;
+      color: var(--text-3);
+      font-size: 14px;
+      pointer-events: none;
+      transition: color 0.15s ease;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      padding: 13px 16px 13px 42px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-1);
+      font-family: var(--f-body);
+      font-size: 14px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input-wrapper input::placeholder { color: var(--text-3); }
+
+    .input-wrapper input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(74,143,245,0.13);
+    }
+
+    /* focus moves the icon color too */
+    .input-wrapper:focus-within i.input-icon {
+      color: var(--accent);
+    }
+
+    /* password eye toggle */
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-3);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      border-radius: 6px;
+      transition: color 0.15s ease, background 0.15s ease;
+    }
+
+    .toggle-password:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* ── Buttons ── */
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-family: var(--f-display);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s var(--ease);
+      border: 1px solid transparent;
+    }
+
+    .btn-signup {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-signup:hover {
+      background: var(--accent-hi);
+      box-shadow: 0 6px 28px rgba(74,143,245,0.5);
+      transform: translateY(-1px);
+    }
+
+    .btn-signup:active { transform: translateY(0); }
+
+    .btn-login {
+      background: transparent;
+      color: var(--text-2);
+      border-color: var(--border);
+    }
+
+    .btn-login:hover {
+      background: var(--surface-2);
+      border-color: var(--border-hover);
+      color: var(--text-1);
+    }
+
+    /* ── Divider ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0 4px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider span {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Footer note ── */
+    .footer-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+
+    .footer-note a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-note a:hover { color: var(--accent-hi); }
+
+    /* ── Input stagger animation ── */
+    .input-group:nth-child(1) { animation: fieldin 0.4s 0.1s var(--ease) both; }
+    .input-group:nth-child(2) { animation: fieldin 0.4s 0.2s var(--ease) both; }
+    .button-group             { animation: fieldin 0.4s 0.3s var(--ease) both; }
+
+    @keyframes fieldin {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0);   }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <h2>VOID<span style="color:var(--accent)">R</span></h2>
+      <p>Enter the void</p>
+    </div>
+
+    <!-- Username -->
+    <div class="input-group">
+      <label>Username</label>
+      <div class="input-wrapper">
+        <i class="fas fa-at input-icon"></i>
+        <input type="text" id="new_username" placeholder="cooluser123" autocomplete="username">
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="input-group">
+      <label>Password</label>
+      <div class="input-wrapper">
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="new_password" placeholder="••••••••" autocomplete="current-password">
+        <button class="toggle-password" id="togglePassword" type="button" aria-label="Toggle password">
+          <i class="far fa-eye" id="eyeIcon"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-signup" id="signup_btn">
+        <i class="fas fa-user-plus"></i> Create Account
+      </button>
+
+      <div class="divider"><span>or</span></div>
+
+      <button class="btn btn-login" id="login_btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+    </div>
+
+    <div class="footer-note">
+      By joining you agree to our <a href="#">Terms of Service</a>.
+    </div>
+
+  </div>
+
+  <script type="module" src="/script/new_user.js"></script>
+
+  <script>
+    (function () {
+      const passwordInput = document.getElementById('new_password');
+      const toggleBtn     = document.getElementById('togglePassword');
+      const eyeIcon       = document.getElementById('eyeIcon');
+
+      if (toggleBtn && passwordInput) {
+        toggleBtn.addEventListener('click', function () {
+          const isHidden = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isHidden ? 'text' : 'password');
+          eyeIcon.classList.toggle('fa-eye',      !isHidden);
+          eyeIcon.classList.toggle('fa-eye-slash', isHidden);
+        });
+      }
+    })();
+  </script>
+
+</body>
+</html>
