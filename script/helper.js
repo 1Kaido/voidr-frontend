@@ -1,7 +1,7 @@
 // helper.js
 console.log("Helper.js Loaded");
 
-import { BASE_URL } from "./configs.js";
+import { BASE_URL,BASE_PATH } from "./configs.js";
 
 
 /* ======================================================
@@ -135,7 +135,7 @@ export async function apiRequest(route, method = "GET", body = null) {
       }
     } else {
       localStorage.removeItem("token");
-      window.location.href = "/templates/sign_up_page.html";
+      window.location.href = `${BASE_PATH}/templates/sign_up_page.html`;
       return;
     }
   }
