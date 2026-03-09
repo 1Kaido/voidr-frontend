@@ -3,7 +3,7 @@ console.log("new_user.js loaded");
 
 import { validate_username, validatePassword, apiRequest } from './helper.js';
 import { toast, setLoading } from './ui_feedback.js';
-import { BASE_URL, BASE_PATH }
+import { BASE_URL, BASE_PATH } from './configs.js'
 document.getElementById("signup_btn")
   .addEventListener("click", () => check_user("sign_up", "signup_btn", "Creating account..."));
 
