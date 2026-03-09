@@ -40,7 +40,7 @@ async function check_user(route, btnId, loadingText) {
 
     // Small delay so user sees the success toast
     setTimeout(() => {
-      window.location.href = "/templates/main_page.html";
+      window.location.href = "/templates/index.html";
     }, 800);
 
   } catch (error) {
