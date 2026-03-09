@@ -5,7 +5,7 @@ import { loadPosts } from './postUI.js';
 import { apiRequest, create_element } from './helper.js';
 import { addClick } from "./eventListener.js";
 import { toast } from './ui_feedback.js';
-
+import { BASE_URL, BASE_PATH } from './configs.js'
 export const data = await apiRequest("get_posts", "GET");
 console.log(data);
 
@@ -27,6 +27,6 @@ addClick("logout", async () => {
   toast.info("Logged out. See you in the void 👋");
   localStorage.removeItem("token");
   setTimeout(() => {
-    window.location.href = "/templates/sign_up_page.html";
+    window.location.href = `${BASE_PATH}/templates/sign_up_page.html`;
   }, 1000);
 });
