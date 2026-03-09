@@ -1,4 +1,5 @@
 import { apiRequest } from "./helper.js";
+import { BASE_URL, BASE_PATH }
 console.log("requireAuth loaded");
 
 export async function requireAuth() {
@@ -8,6 +9,6 @@ export async function requireAuth() {
     } catch (err) {
         console.log("Auth check failed:", err);
         localStorage.removeItem("token");
-        window.location.href = "/templates/sign_up_page.html";
+        window.location.href = `${BASE_PATH}/templates/sign_up_page.html`;
     }
 }
