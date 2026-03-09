@@ -1,5 +1,5 @@
 import { apiRequest } from "./helper.js";
-import { BASE_URL, BASE_PATH }
+import { BASE_URL, BASE_PATH } from './configs.js'
 console.log("requireAuth loaded");
 
 export async function requireAuth() {
