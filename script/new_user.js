@@ -40,7 +40,7 @@ async function check_user(route, btnId, loadingText) {
 
     // Small delay so user sees the success toast
     setTimeout(() => {
-      window.location.href = `${BASE_PATH}/templates/sign_up_page.html`;
+      window.location.href = `${BASE_PATH}/index.html`;
       
     }, 800);
 
