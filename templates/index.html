@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>VOIDR</title>
+  <!-- Font Awesome + Google Font -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css"/>
+
+  <style>
+    /* ── VOIDR Top Bar ── */
+    .voidr-topbar {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--s-lg) var(--s-md) var(--s-sm);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .voidr-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .voidr-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(74,143,245,0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--accent);
+      box-shadow: 0 0 14px var(--accent-glow);
+      flex-shrink: 0;
+    }
+
+    .voidr-logo-text {
+      font-family: var(--f-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-1);
+      line-height: 1;
+    }
+
+    .voidr-logo-text span {
+      color: var(--accent);
+    }
+
+    .voidr-tagline {
+      font-size: var(--t-xs);
+      color: var(--text-3);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ── Feed section label ── */
+    .feed-header {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto var(--s-sm);
+      padding: 0 var(--s-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feed-header h2 {
+      font-family: var(--f-display);
+      font-size: var(--t-base);
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-size: var(--t-xs);
+    }
+
+    .feed-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* hide the old #heading since we replaced it */
+    #home_page > #heading { display: none; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     HOME PAGE
+     ══════════════════════════════ -->
+<div id="home_page" class="page active">
+
+  <!-- VOIDR brand bar -->
+  <div class="voidr-topbar">
+    <div class="voidr-logo">
+      <div class="voidr-logo-icon">
+        <i class="fas fa-bolt"></i>
+      </div>
+      <div>
+        <div class="voidr-logo-text">VOID<span>R</span></div>
+        <div class="voidr-tagline">Enter the void</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feed label -->
+  <div class="feed-header">
+    <h2>Latest Posts</h2>
+  </div>
+
+  <h2 id="heading">Latest Posts</h2>
+  <div id="postsContainer"></div>
+  <div id="userFoundContainer"></div>
+
+</div>
+
+
+<!-- ══════════════════════════════
+     POST PAGE
+     ══════════════════════════════ -->
+<div id="post_page" class="page">
+  <div id="make_post">
+    <div id="back_btn_make_post">Back</div>
+    <h2 id="heading">Make a Post</h2>
+    <input type="text" id="post_title" placeholder="Enter your title">
+    <textarea id="post_description" placeholder="Enter your description"></textarea>
+    <button id="send_btn">Send</button>
+  </div>
+</div>
+
+
+<!-- °══════════════════════════════
+     PROFILE PAGE
+     ══════════════════════════════ -->
+<div id="profile_page" class="page">
+  <div id="profileView">
+    <div class="profile-header-bar">
+      <div id="back_btn_profile">Back</div>
+      <div id="hamburger"></div>
+    </div>
+
+    <div id="user_data"></div>
+
+    <h3>My Posts</h3>
+    <div id="user_posts"></div>
+
+    <div id="edit_user_posts"></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════
+     OVERLAY
+     ══════════════════════════════ -->
+<div id="overlay" class="overlay hidden">
+  <div id="overlayContent"></div>
+</div>
+
+
+<!-- ══════════════════════════════
+     NAVBAR
+     ══════════════════════════════ -->
+<nav class="navbar">
+  <ul class="nav-links" id="nav">
+
+    <li data-page="home_page">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </li>
+
+    <li data-page="post_page">
+      <i class="fas fa-plus-square"></i>
+      <span>Post</span>
+    </li>
+
+    <li data-page="profile_page">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </li>
+
+  </ul>
+</nav>
+
+
+<!-- ══════════════════════════════
+     SCRIPTS
+     ══════════════════════════════ -->
+<script type="module">
+  import { requireAuth } from "/script/auth.js";
+  requireAuth();
+</script>
+
+<script type="module" src="/script/ui.js"></script>
+<script type="module" src="/script/send_data.js"></script>
+<script type="module" src="/script/get_user_data.js"></script>
+<script type="module" src="/script/postsEvent.js"></script>
+<script type="module" src="/script/eventListener.js"></script>
+<script type="module" src="/script/postUI.js"></script>
+<script type="module" src="/script/user_edit.js"></script>
+<script type="module" src="/script/navRouter.js"></script>
+<script type="module" src="/script/main.js"></script>
+<script type="module" src="/script/backButtons.js"></script>
+<script type="module" src="/script/update_delete.js"></script>
+<script type="module" src="/script/find_user.js"></script>
+<script type="module" src="/script/ui_feedback.js"></script>
+
+</body>
+</html>
