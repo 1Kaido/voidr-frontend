@@ -1,9 +1,9 @@
 // send_data.js
 console.log("send_data.js Loaded");
 
-import { apiRequest } from "/script/helper.js";
-import { loadPosts } from "/script/postUI.js";
-import { toast, setLoading } from "/script/ui_feedback.js";
+import { apiRequest } from "./helper.js";
+import { loadPosts } from "./postUI.js";
+import { toast, setLoading } from "./ui_feedback.js";
 
 document.getElementById("send_btn").addEventListener("click", send);
 
