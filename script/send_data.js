@@ -14,7 +14,17 @@ async function send() {
   if (!post_title || !post_description) {
     toast.warning("Both title and description are required");
     return;
-  }
+}
+
+if (post_title.length > 200) {
+    toast.warning("Title too long — max 100 characters");
+    return;
+}
+
+if (post_description.length > 1000) {
+    toast.warning("Description too long — max 1000 characters");
+    return;
+}
 
   setLoading("send_btn", true, "Posting...");
 
