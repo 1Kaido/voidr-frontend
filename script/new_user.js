@@ -3,7 +3,7 @@ console.log("new_user.js loaded");
 
 import { validate_username, validatePassword, apiRequest } from './helper.js';
 import { toast, setLoading } from './ui_feedback.js';
-
+import { BASE_URL, BASE_PATH }
 document.getElementById("signup_btn")
   .addEventListener("click", () => check_user("sign_up", "signup_btn", "Creating account..."));
 
@@ -40,7 +40,7 @@ async function check_user(route, btnId, loadingText) {
 
     // Small delay so user sees the success toast
     setTimeout(() => {
-      window.location.href = "/voidr-frontend/index.html";
+      window.location.href = `${BASE_PATH}/templates/sign_up_page.html`;
       
     }, 800);
 
